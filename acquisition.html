@@ -86,7 +86,7 @@ const categories = {
     },
     {
       label:"Water 🥤",
-      need:"Hiro feels thirsty and sees a public water dispenser. <br> He wants <b>4</b> cups of water. ",
+      need:"Hiro feels thirsty and sees a public water dispenser. He wants <b>4</b> cups of water. ",
       outcome:"Hiro ended up filling his water bottle with {{N}} cups. How would Hiro feel?",
       emoji:"🥤",
       null:"Suppose that Hiro did not get to fill his water bottle with any water. How would Hiro feel?"
@@ -127,7 +127,7 @@ const categories = {
   entertainment: { stimuli: [
     {
       label:"Gaming 🎮",
-      need:"Eric is bored over the weekend and hears ahout new game releases. <br> He wants to play 4 new free games",
+      need:"Eric is bored over the weekend and hears ahout new game releases. He wants to play 4 new free games",
       outcome:"Eric ended up adding {{N}} free games to his library. How would Eric feel?",
       emoji:"🎮",
       null:"Suppose that he did not get to add any free games to his library. How would Eric feel?"
@@ -141,7 +141,7 @@ const categories = {
     },
     {
       label:"Reading 📖",
-      need:"Zuri is preparing for the weekend and wants something to read. <br> She saw that a neighbor is clearing out her large comic book collection, and she wants 4 comics.",
+      need:"Zuri is preparing for the weekend and wants something to read. She saw that a neighbor is clearing out her large comic book collection, and she wants 4 comics.",
       outcome:"She ended up taking {{N}} comic books home. How would Zuri feel?",
       emoji:"📖",
       null:"Suppose that Zuri did not get to take any comic books home. How would Zuri feel?"
@@ -557,8 +557,8 @@ const followupSliderIndex = jsPsych.randomization.sampleWithoutReplacement(slide
 
 // Define a follow-up trial that appears after a response
 const forbiddenInsertPositions = new Set([followupSliderIndex + 1, followupSliderIndex + 2]);
-const directions = jsPsych.randomization.shuffle(['left', 'right']);
-const attentionChecks = directions.map(d => attentionCheck(d));
+const direction = jsPsych.randomization.sampleWithoutReplacement(['left', 'right'], 1)[0];
+const attentionChecks = [attentionCheck(direction)];
 
 // Ensure that attention checks only appear after prompt
 let validIndices = [];
