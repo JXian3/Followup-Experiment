@@ -91,12 +91,22 @@ body{font-family:sans-serif;}
   padding-bottom: 0px !important;
 }
 
-.jspsych-html-slider-response-container {
-  margin-bottom: 2px !important;
+/* Reset the slider container position for attention checks */
+.attention-check .jspsych-html-slider-response-container {
+  transform: translateY(0) !important;
+  margin-bottom: 20px !important;   
+}
+
+.attention-check .jspsych-html-slider-response-prompt {
+  margin-top: 20px !important;       
 }
 
 .jspsych-html-slider-response-label {
-  margin-top: -4px !important;   /* nudge up toward the slider */
+  margin-top: 80px !important;
+}
+
+.jspsych-html-slider-response-container{
+  transform: translateY(-80px);
 }
 
 .jspsych-display-element {
@@ -110,7 +120,7 @@ body{font-family:sans-serif;}
 
 /* Slider‑instruction prompt */
 .jspsych-html-slider-response-prompt {
-  margin-top: -30px !important;  
+  margin-top: -80px !important;  
   margin-bottom: 2px !important;
   font-size: 16px;
   text-align: center;
@@ -120,9 +130,14 @@ body{font-family:sans-serif;}
   margin-top: -10px !important;     
 }
 
+.trial-wrapper{
+  transform: translateY(-80px);
+}
+
 .need-text {
-  margin-top: -80px;
-  margin-bottom: 40px;
+  margin: 0 auto 20px auto; 
+  max-width: 800px;
+  line-height: 1.35;
   text-align: center;
 }
 
@@ -131,7 +146,6 @@ body{font-family:sans-serif;}
     appearance: none; 
 }
 
-/* ---- WebKit (Chrome, Safari) ---- */
 .original-slider-ticks input.jspsych-slider::-webkit-slider-runnable-track {
 
   /* 1) only the gradients here */

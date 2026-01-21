@@ -79,21 +79,21 @@ const categories = {
   food: { stimuli: [
     {
       label:"Cookie 🍪",
-      need:"Emma feels hungry and sees that her favorite bakery made too many cookies and is handing them out for free. She wants <b>4</b> cookies.",
+      need:"Emma feels hungry and sees that her favorite bakery made too many cookies and is handing them out for free. <br> She wants <b>4</b> cookies.",
       outcome:"Emma ended up taking {{N}} cookies. How would Emma feel?",
       emoji:"🍪",
       null:"Suppose that Emma did not get to take any cookies. How would Emma feel?"
     },
     {
       label:"Water 🥤",
-      need:"Hiro feels thirsty and sees a public water dispenser. He wants <b>4</b> cups of water. ",
+      need:"Hiro feels thirsty and sees a public water dispenser. <br> He wants <b>4</b> cups of water. ",
       outcome:"Hiro ended up filling his water bottle with {{N}} cups. How would Hiro feel?",
       emoji:"🥤",
       null:"Suppose that Hiro did not get to fill his water bottle with any water. How would Hiro feel?"
     },
     {
       label:"Healthy fruits 🍊",
-      need:"Nia feels hungry and sees that a farm stand is giving out free oranges. She wants 4 oranges.",
+      need:"Nia feels hungry and sees that a farm stand is giving out free oranges. <br> She wants 4 oranges.",
       outcome:"Nia ended up taking {{N}} oranges home. How would Nia feel?",
       emoji:"🍊",
       null:"Suppose that Nia did not get to take any oranges home. How would Nia feel?"
@@ -103,7 +103,7 @@ const categories = {
   sensory: { stimuli: [
     {
       label:"Light 💡",
-      need:"Adam thinks it's too dark in his house and hears that his friend is moving and giving away household supplies. He wants to make his house brighter by adding 4 light bulbs.",
+      need:"Adam thinks it's too dark in his house and hears that his friend is moving and giving away household supplies. <br> He wants to make his house brighter by adding 4 light bulbs.",
       outcome:"Adam ended up taking {{N}} light bulbs. How would Adam feel?",
       emoji:"💡",
       null:"Suppose that Adam did not get to take any light bulbs. How would Adam feel?"
@@ -117,7 +117,7 @@ const categories = {
     },
     {
       label:"Scent 💨",
-      need:"Olivia is looking to change her style, and sees that a fragrance shop is giving out free samples. Olivia was interested in trying out 4 perfumes. ",
+      need:"Olivia is looking to change her style, and sees that a fragrance shop is giving out free samples. <br> Olivia was interested in trying out 4 perfumes. ",
       outcome:"Olivia ended up taking {{N}} fragrance samples. How would Olivia feel?",
       emoji:"💨",
       null:"Suppose that Olivia did not get to take any fragrance samples. How would Olivia feel?"
@@ -127,7 +127,7 @@ const categories = {
   entertainment: { stimuli: [
     {
       label:"Gaming 🎮",
-      need:"Eric is bored over the weekend and hears ahout new game releases. He wants to play 4 new free games",
+      need:"Eric is bored over the weekend and hears ahout new game releases. <br> He wants to play 4 new free games",
       outcome:"Eric ended up adding {{N}} free games to his library. How would Eric feel?",
       emoji:"🎮",
       null:"Suppose that he did not get to add any free games to his library. How would Eric feel?"
@@ -141,7 +141,7 @@ const categories = {
     },
     {
       label:"Reading 📖",
-      need:"Zuri is preparing for the weekend and wants something to read. She saw that a neighbor is clearing out her large comic book collection, and she wants 4 comics.",
+      need:"Zuri is preparing for the weekend and wants something to read. <br> She saw that a neighbor is clearing out her large comic book collection, and she wants 4 comics.",
       outcome:"She ended up taking {{N}} comic books home. How would Zuri feel?",
       emoji:"📖",
       null:"Suppose that Zuri did not get to take any comic books home. How would Zuri feel?"
@@ -250,11 +250,15 @@ function sliderPosDesc(value){
 function sliderTrial({ visual, need, msg, cat, label, amt, n, poss, childName }) {
   return {
     type: jsPsychHtmlSliderResponse,
-    stimulus: visual + `<p>${msg}</p>` +
-              `<img src=\"img/feelingScale2.png\" class=\"feeling-scale\" alt=\"scale\">`,
+    stimulus: `
+  <div class="trial-wrapper">
+    ${visual}
+    <p class="outcome-text">${msg}</p>
+    <img src="img/feelingScale2.png" class="feeling-scale" alt="scale">
+  </div>`,
     labels: ["Very Bad","Bad","Neutral","Good","Very Good"],
     min: 0, max: 100, slider_start: 50, require_movement: false, css_classes: ['original-slider-ticks'],
-    prompt: `<p style="text-align:center; margin-top:5px; margin-bottom:15px;">Drag the slider to indicate your answer.</p>`,
+    prompt: `<p style="text-align:center; margin-top:-80px; margin-bottom:15px;">Drag the slider to indicate your answer.</p>`,
     data: { category: cat, stimulus_label: label, trial_number: n, amount: amt, possessive: poss, childName }
   };
 }
@@ -269,10 +273,11 @@ function attentionCheck(direction) {
               `<img src=\"img/feelingScale.png\" class=\"feeling-scale\" alt=\"scale\">`,
     labels: ["Very Bad","Bad","Neutral","Good","Very Good"],
     min: 0, max: 100, slider_start: 50, require_movement: true,
-    prompt: `<p style="text-align:center; margin-top:20px;">Drag the slider to indicate your answer.</p>`,
+    prompt: `<p style="text-align:center; margin-top:0px;">Drag the slider to indicate your answer.</p>`,
+    css_classes: ['attention-check'], 
     data: { attention_check: true, correct_direction: direction },
     on_finish: d => { d.correct = (direction === 'right' ? d.response === 100 : d.response === 0); }
-  };
+  }
 }
 
 /* ================= START ================= */
@@ -581,7 +586,6 @@ const FOLLOWUP_TAG = "__followup_target__";
     0
   ];
 }
-
 
 const attentionIndices = jsPsych.randomization
   .sampleWithoutReplacement(validIndices, attentionChecks.length)
