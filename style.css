@@ -1,0 +1,174 @@
+/* ===== Global layout ===== */
+body{font-family:sans-serif;}
+.jspsych-html-slider-response-container{width:100%!important;max-width:520px;margin:auto;}
+.jspsych-html-slider-response-stimulus {
+  text-align: center;
+  max-width: 520px;
+  margin: -25px auto 8px;   
+}
+
+/* ===== Feeling scale ===== */
+.feeling-scale{
+  max-width: 600px;
+  width: 120%;
+  height: auto;
+  margin: 0 auto 5px;
+  display: block;
+  }
+
+/* ===== Slider labels ===== */
+.slider-labels-custom{display:flex;justify-content:space-between;width:100%;font-weight:bold;margin-top:8px;}
+
+/* ===== Visual wrapper ===== */
+.visual-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 420px;
+  min-height: 100px;
+  margin: 10px auto;
+  margin-top: -20px;
+}
+
+.msg-container {
+  margin-top: -30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.grid-image {
+  height: 70px;
+  margin: 2px auto 0;
+  margin-right: 110px
+}
+.emoji-track {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 18px;
+  pointer-events: none;
+  margin-top: -50px;
+  padding-left: 200px;
+  width: 100%;
+}
+
+.emoji-track span{font-size:32px;line-height:1;}
+
+.child-image {
+  display: block;
+  margin: 0 auto 6px;
+  height: 200px;          
+  position: relative;
+  z-index: 1;
+}
+
+.emoji-bubble {
+  position: absolute;
+  top: 15px;            
+  right: 180px;  
+  font-size: 32px;
+  z-index: 3;
+}
+
+.child-wrapper {
+  position: relative;
+  width: fit-content;
+}
+
+.emoji-bubble.need-page {
+  top: 15px;
+  left: 190px;
+}
+
+.intro-screen {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.jspsych-content-wrapper {
+  padding-bottom: 0px !important;
+}
+
+.jspsych-html-slider-response-container {
+  margin-bottom: 2px !important;
+}
+
+.jspsych-html-slider-response-label {
+  margin-top: -4px !important;   /* nudge up toward the slider */
+}
+
+.jspsych-display-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* align to top */
+  align-items: center;
+  height: 100vh;                 /* fill but not exceed the viewport */
+  padding: 0 !important;
+}
+
+/* Slider‑instruction prompt */
+.jspsych-html-slider-response-prompt {
+  margin-top: -30px !important;  
+  margin-bottom: 2px !important;
+  font-size: 16px;
+  text-align: center;
+}
+
+.jspsych-display-element .jspsych-btn {
+  margin-top: -10px !important;     
+}
+
+.need-text {
+  margin-top: -80px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.original-slider-ticks input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; 
+}
+
+/* ---- WebKit (Chrome, Safari) ---- */
+.original-slider-ticks input.jspsych-slider::-webkit-slider-runnable-track {
+
+  /* 1) only the gradients here */
+  background-image:
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444);
+
+  /* 2) five no-repeats */
+  background-repeat: no-repeat, no-repeat, no-repeat;
+
+  /* 3) five positions at 0%,25%,50%,75%,100% centered vertically */
+  background-position:
+    25%  50%,
+    50%  50%,
+    75%  50%;
+
+  /* 4) each line is 1px×10px */
+  background-size:
+    1px 10px,
+    1px 10px,
+    1px 10px;
+}
+
+/*Firefox*/
+.original-slider-ticks input.jspsych-slider::-moz-range-track {
+  background-image:
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444),
+    linear-gradient(#444, #444);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position:
+    25%  50%,
+    50%  50%,
+    75%  50%;
+  background-size:
+    1px 10px,
+    1px 10px,
+    1px 10px;
+}
