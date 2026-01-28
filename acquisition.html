@@ -80,21 +80,24 @@ const categories = {
     {
       label:"Cookie 🍪",
       need:"Emma feels hungry and sees that her favorite bakery made too many cookies and is handing them out for free. She wants <b>4</b> cookies.",
-      outcome:"Emma ended up taking {{N}} cookies. How would Emma feel?",
+      outcome:"Emma ends up taking {{N}} cookies. How would Emma feel?",
+      singular:"Emma ends up taking {{N}} cookie. How would Emma feel?",
       emoji:"🍪",
       null:"Suppose that Emma did not get to take any cookies. How would Emma feel?"
     },
     {
       label:"Water 🥤",
       need:"Hiro feels thirsty and sees a public water dispenser. He wants <b>4</b> cups of water. ",
-      outcome:"Hiro ended up filling his water bottle with {{N}} cups. How would Hiro feel?",
+      outcome:"Hiro ends up filling his water bottle with {{N}} cups. How would Hiro feel?",
+      singular:"Hiro ends up filling his water bottle with {{N}} cup. How would Hiro feel?", 
       emoji:"🥤",
       null:"Suppose that Hiro did not get to fill his water bottle with any water. How would Hiro feel?"
     },
     {
       label:"Healthy fruits 🍊",
       need:"Nia feels hungry and sees that a farm stand is giving out free oranges. She wants 4 oranges.",
-      outcome:"Nia ended up taking {{N}} oranges home. How would Nia feel?",
+      outcome:"Nia ends up taking {{N}} oranges home. How would Nia feel?",
+      singular:"Nia ends up taking {{N}} orange home. How would Nia feel?", 
       emoji:"🍊",
       null:"Suppose that Nia did not get to take any oranges home. How would Nia feel?"
     },
@@ -104,21 +107,24 @@ const categories = {
     {
       label:"Light 💡",
       need:"Adam thinks it's too dark in his house and hears that his friend is moving and giving away household supplies. He wants to make his house brighter by adding 4 light bulbs.",
-      outcome:"Adam ended up taking {{N}} light bulbs. How would Adam feel?",
+      outcome:"Adam ends up taking {{N}} light bulbs. How would Adam feel?",
+      singular:"Adam ends up taking {{N}} light bulb. How would Adam feel?", 
       emoji:"💡",
       null:"Suppose that Adam did not get to take any light bulbs. How would Adam feel?"
     },
     {
       label:"Temperature ♨️",
       need:"Mei's apartment is too cold and she sees that a hardware store is giving away free space heaters. She wants to make her house warmer by adding 4 heaters.",
-      outcome:"Mei ended up taking {{N}} heaters home. How would Mei feel?",
+      outcome:"Mei ends up taking {{N}} heaters home. How would Mei feel?",
+      singular:"Mei ends up taking {{N}} heater home. How would Mei feel?",
       emoji:"♨️",
       null:"Suppose that Mei did not get to take any heaters home. How would Mei feel?"
     },
     {
       label:"Scent 💨",
-      need:"Olivia is looking to change her style, and sees that a fragrance shop is giving out free samples. Olivia was interested in trying out 4 perfumes. ",
-      outcome:"Olivia ended up taking {{N}} fragrance samples. How would Olivia feel?",
+      need:"Olivia is looking to change her style, and sees that a fragrance shop is giving out free samples. Olivia is interested in trying out 4 perfumes. ",
+      outcome:"Olivia ends up taking {{N}} fragrance samples. How would Olivia feel?",
+      singular:"Olivia ends up taking {{N}} fragrance sample. How would Olivia feel?",
       emoji:"💨",
       null:"Suppose that Olivia did not get to take any fragrance samples. How would Olivia feel?"
     },
@@ -128,21 +134,24 @@ const categories = {
     {
       label:"Gaming 🎮",
       need:"Eric is bored over the weekend and hears ahout new game releases. He wants to play 4 new free games",
-      outcome:"Eric ended up adding {{N}} free games to his library. How would Eric feel?",
+      outcome:"Eric ends up adding {{N}} free games to his library. How would Eric feel?",
+      singular:"Eric ends up adding {{N}} free game to his library. How would Eric feel?", 
       emoji:"🎮",
       null:"Suppose that he did not get to add any free games to his library. How would Eric feel?"
     },
     {
       label:"Watching TV 🎞️",
       need:"Han is preparing for a long upcoming train trip. He wants to watch 4 episodes of a TV show on the train. ",
-      outcome:"Han ended up downloading {{N}} episodes for the trip. How would Han feel?",
+      outcome:"Han ends up downloading {{N}} episodes for the trip. How would Han feel?",
+      singular:"Han ends up downloading {{N}} episode for the trip. How would Han feel?",
       emoji:"🎞️",
       null:"Suppose that he did not get to download any episodes for the trip. How would Han feel?"
     },
     {
       label:"Reading 📖",
       need:"Zuri is preparing for the weekend and wants something to read. She saw that a neighbor is clearing out her large comic book collection, and she wants 4 comics.",
-      outcome:"She ended up taking {{N}} comic books home. How would Zuri feel?",
+      outcome:"She ends up taking {{N}} comic books home. How would Zuri feel?",
+      singular:"She ends up taking {{N}} comic book home. How would Zuri feel?",
       emoji:"📖",
       null:"Suppose that Zuri did not get to take any comic books home. How would Zuri feel?"
     },
@@ -487,10 +496,17 @@ function formatQty(amount, stim){
 }
 
 function buildMessage(stim, amount){
+  // 1. If amount is 0, use the null string
   if (amount === 0) return stim.null;
+
+  // 2. If amount is 1 AND a singular version exists, use that
+  if (amount === 1 && stim.singular) {
+     return stim.singular.replace('{{N}}', String(amount));
+  }
+
+  // 3. Otherwise (2, 3, 4...), use the standard plural outcome
   return stim.outcome.replace('{{N}}', String(amount));
 }
-
 // Present all stimuli in a completely random order
 const allStimuli = [];
 Object.keys(categories).forEach(cat => {
