@@ -3,27 +3,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Experiment Selector (Testing Mode)</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      margin-top: 100px;
-    }
-    button {
-      font-size: 20px;
-      padding: 15px 30px;
-      margin: 20px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Redirecting...</title>
+  <script>
+    (function () {
+      const pages = ["consumption.html", "acquisition.html"];
+      const randomPage = pages[Math.floor(Math.random() * pages.length)];
+      window.location.replace(randomPage);
+    })();
+  </script>
 </head>
 <body>
-  <h1>Select Experiment Version (Test Mode)</h1>
-  
-  <button onclick="window.location.href='acquisition.html'">Go to Acquisition</button>
-  <button onclick="window.location.href='consumption.html'">Go to Consumption</button>
-
   <noscript>
     <p>This study requires JavaScript. Please enable JavaScript and refresh the page.</p>
   </noscript>
