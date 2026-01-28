@@ -50,6 +50,7 @@
         show_progress_bar: true,
         on_finish: function() {
           window.location = "https://connect.cloudresearch.com/participant/project/C0D5F1CF9B/complete";
+          //jsPsych.data.displayData();
         }
       });
 
@@ -445,7 +446,7 @@ const feedback_demographics = {
 const save_data = {
                 type: jsPsychPipe,
                 action: "save",
-                experiment_id: "BSvmMHuqkMU9",
+                experiment_id: "wys6pvzKngqV",
                 filename: filename,
                 data_string: ()=>jsPsych.data.get().csv()
               };
